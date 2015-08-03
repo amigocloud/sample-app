@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h2>Datasets of the project:</h2>
+<div class="list-group">
+{% for dataset in datasets.results %}
+  <form>
+    <input type="hidden" name="token" value="{{ token }}">
+    <input type="hidden" name="dataset_id" value="{{ dataset.id }}">
+    <button type="submit" class="list-group-item">
+      <strong>{{ dataset.name }}</strong>
+    </button>
+  </form>
+{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block body %}
+<form>
+  <div class="input-group" style="margin-bottom:10px">
+    <input type="text" class="form-control" name="token" placeholder="Paste you API token">
+    <span class="input-group-btn">
+      <button type="submit" class="btn btn-default" type="button">Go</button>
+    </span>
+  </div>
+  Don't know where to get it?
+  <a href="https://www.amigocloud.com/accounts/tokens" target="_blank">
+    Click here.
+  </a>
+</form>
+{% endblock %}

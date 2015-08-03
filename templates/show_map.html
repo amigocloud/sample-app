@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AmigoCloud App Demo</title>    
+  <link rel="stylesheet" href="http://leafletjs.com/dist/leaflet.css" />
+  <script src="http://leafletjs.com/dist/leaflet.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <style>
+  body {
+    padding: 0;
+    margin: 0;
+  }
+  html, body, #map {
+    height: 100%;
+  }
+  #start_over {
+    position: absolute;
+    top: 1%;
+    left: 50%;
+    font-size: 24px;
+    margin-left: {% if error %}-200px{% else %}-67px{% endif %};
+    text-decoration: none;
+    padding: 5px 20px;
+    background-color: rgba(0,0,0,0.2);
+    color: {% if error %}red{% else %}black{% endif %};
+  }
+  </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <a  id="start_over" href="/">
+      {% if error %}{{ error }}{% else %}&lt; Start over{% endif %}
+    </a>
+    <script>
+    $(document).ready(function () {
+      var map, amigostreet, dataset, control, controlMaps;
+      amigostreet = L.tileLayer('https://cdnamigocloud.global.ssl.fastly.net/api/v1/base_layers/2/tiles/{z}/{x}/{y}.png', {});
+      dataset = L.tileLayer('{{ dataset.tiles }}/{z}/{x}/{y}.png?c={{ dataset.cache_busting }}', {});
+      controlMaps = {
+        baseMaps: {
+          "AmigoStreet": amigostreet
+        },
+        overlayMaps: {
+          "{{ dataset.name }}" : dataset
+        }
+      };
+      map = L.map('map', {
+        layers: [amigostreet, dataset]
+      }).setView([0, 0], 2);
+      control = L.control.layers(
+        controlMaps.baseMaps, controlMaps.overlayMaps
+      ).addTo(map);
+    });
+    </script>
+  </body>
+</html>

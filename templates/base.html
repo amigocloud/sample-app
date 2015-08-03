@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AmigoCloud App Demo</title>    
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" media="all" rel="stylesheet" />
+  <style>
+  body {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  </style>
+</head>
+<body class="container">
+  <div style="text-align:center;margin-bottom:20px">
+    <img src="https://cdnamigocloud.global.ssl.fastly.net/static/homepage/img/press-kit/amigocloud.png" height="80"/>
+  </div>
+  {% if error %}
+  <p class="alert alert-danger">{{ error }}</p>
+  <p>
+    <a class="btn btn-primary" href="/">&lt; Start over</a>
+  </p>
+  {% else %}
+  {% block body %}
+  {% endblock %}
+  {% endif %}
+</body>
+</html>
